@@ -20,7 +20,7 @@ function App() {
           <Form />
         </div>
 
-        <div className="bottom-half">
+        <div className="bottom-half rounded">
           {loading.all && <AllTodos />}
           {loading.completed && <CompletedTodo />}
           <div className="d-flex justify-content-between ps-3 pe-3 pt-3 pb-3 bg-white mt-1">
@@ -32,18 +32,24 @@ function App() {
               onClick={() => {
                 setLoading({ ...loading, all: true, completed: false });
               }}
-              className="fw-bold"
+              className={loading.all ? "active fw-bold" : ""}
             >
               All
             </p>
-            <p className="fw-bold">Active</p>
+            <p
+              onClick={() => {
+                setLoading({ ...loading, all: true, completed: false });
+              }}
+              className={loading.active ? "active fw-bold" : "fw-bold"}
+            >
+              Active
+            </p>
             <p
               onClick={(e) => {
                 console.log("happened");
                 handleSwitchCompleted();
-                e.target.classList.add("pactive");
               }}
-              className="fw-bold"
+              className={loading.completed ? "active fw-bold" : "fw-bold"}
             >
               Completed
             </p>

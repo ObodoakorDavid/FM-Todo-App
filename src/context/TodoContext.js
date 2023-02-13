@@ -18,6 +18,7 @@ export const TodoProvider = ({ children }) => {
   const [loading, setLoading] = useState({
     all: true,
     completed: false,
+    active: false,
   });
 
   let HandleNewTodo = () => {
