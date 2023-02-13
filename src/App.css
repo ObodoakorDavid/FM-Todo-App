@@ -1,0 +1,77 @@
+/** @format */
+
+.App {
+  text-align: center;
+  background-color: whitesmoke;
+  height: 100vh;
+}
+
+h1 {
+  margin: 0;
+  text-align: left;
+  color: white;
+}
+
+.bottom-section {
+  display: flex;
+  justify-content: space-around;
+  /* background-color: red; */
+  border-radius: 3px;
+  margin-top: 200px;
+}
+
+.bottom-section p.active {
+  color: blue;
+}
+
+.each-todo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.each-todo > p:nth-of-type(1) {
+  flex: 2;
+  text-align: left;
+  margin: 0;
+  
+}
+
+.top-half {
+  background-image: url(./images/bg-mobile-light.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 50px;
+}
+
+.todo-input {
+  width: 90%;
+  border: none;
+  outline: none;
+}
+
+form,
+.bottom-half {
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.input-div {
+  background-color: white;
+  border-radius: 3px;
+  padding: 5px 0;
+}
+
+.bottom-half {
+  position: relative;
+  bottom: 30px;
+}
+
+.bottom-section > p {
+  cursor: pointer;
+}
+
+.todo-active {
+  text-decoration: line-through;
+}
