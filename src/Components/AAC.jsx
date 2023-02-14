@@ -4,10 +4,10 @@ import React, { useContext } from "react";
 import TodoContext from "../context/TodoContext";
 
 const AAC = () => {
-  const { loading, setLoading, handleSwitchCompleted } =
+  const { loading, setLoading, handleSwitchCompleted, handleSwitchActive } =
     useContext(TodoContext);
   return (
-    <div className="bottom-section mt-4 pt-3 bg-white">
+    <div className="bottom-section mt-4 pt-3">
       <p
         onClick={() => {
           setLoading({ all: true, completed: false, active: false });
@@ -18,11 +18,7 @@ const AAC = () => {
       </p>
       <p
         onClick={() => {
-          setLoading({
-            active: true,
-            completed: false,
-            all: false,
-          });
+          handleSwitchActive();
         }}
         className={loading.active ? "active fw-bold" : "fw-bold"}
       >
@@ -31,11 +27,6 @@ const AAC = () => {
       <p
         onClick={(e) => {
           handleSwitchCompleted();
-          setLoading({
-            active: false,
-            completed: true,
-            all: false,
-          });
         }}
         className={loading.completed ? "active fw-bold" : "fw-bold"}
       >

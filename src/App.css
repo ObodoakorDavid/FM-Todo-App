@@ -43,7 +43,17 @@
 h1 {
   margin: 0;
   text-align: left;
-  color: var(--very-light-gray);
+  color: white;
+}
+
+form input, .each-todo {
+  background-color: var(--very-light-gray);
+  color: var(--dark-grayish-blue);
+}
+
+.bottom-half  div {
+  background-color: var(--very-light-gray);
+  color: var(--dark-grayish-blue);
 }
 
 .bottom-section {
@@ -75,7 +85,7 @@ h1 {
 }
 
 .top-half {
-  background-image: url(./images/bg-mobile-light.jpg);
+  background-image: url(./assets/images/bg-mobile-light.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   padding-bottom: 50px;

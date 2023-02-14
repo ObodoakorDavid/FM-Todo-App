@@ -10,7 +10,7 @@ const CompletedTodo = () => {
       {data.completedTodos.map((todo) => {
         return (
           <div
-            className="each-todo p-2 ps-3 pe-3 border-bottom bg-white text-left"
+            className="each-todo p-2 ps-3 pe-3 border-bottom text-left"
             key={todo.id}
           >
             <input

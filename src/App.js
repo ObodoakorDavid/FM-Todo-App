@@ -9,6 +9,7 @@ import AllTodos from "./Components/AllTodos";
 import CompletedTodo from "./Components/CompletedTodo";
 import Form from "./Components/Form";
 import AAC from "./Components/AAC";
+import ActiveTodos from "./Components/ActiveTodos";
 
 function App() {
   const { data, loading } = useContext(TodoContext);
@@ -23,7 +24,8 @@ function App() {
         <div className="bottom-half rounded">
           {loading.all && <AllTodos />}
           {loading.completed && <CompletedTodo />}
-          <div className="d-flex justify-content-between ps-3 pe-3 pt-3 pb-3 bg-white mt-1">
+          {loading.active && <ActiveTodos/>}
+          <div className="d-flex justify-content-between ps-3 pe-3 pt-3 pb-3 mt-1">
             <small>{data.uncompletedTodos.length} items left</small>
             <small>Clear Completed</small>
           </div>

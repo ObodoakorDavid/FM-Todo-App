@@ -8,6 +8,7 @@ const TodoContext = createContext();
 export default TodoContext;
 
 export const TodoProvider = ({ children }) => {
+  const [darkMode, setDarkMode] = useState(false);
   const [data, setData] = useState({
     todos: [],
     completedTodos: [],
@@ -26,7 +27,6 @@ export const TodoProvider = ({ children }) => {
       id: uuid(),
       todoName: inputValue,
       completed: false,
-      active: true,
     };
 
     console.log(newTodo.id);
@@ -40,7 +40,15 @@ export const TodoProvider = ({ children }) => {
       ...data,
       completedTodos: filteredTodos,
     });
-    setLoading({ ...loading, all: false, completed: true });
+    setLoading({ active: false, all: false, completed: true });
+  };
+  let handleSwitchActive = () => {
+    let filteredTodos = data.todos.filter((todo) => todo.completed == false);
+    setData({
+      ...data,
+      uncompletedTodos: filteredTodos,
+    });
+    setLoading({ active: true, all: false, completed: false });
   };
 
   let handleComplete = (IncomingTodo, completedState) => {
@@ -71,6 +79,9 @@ export const TodoProvider = ({ children }) => {
     setLoading,
     handleSwitchCompleted,
     handleComplete,
+    handleSwitchActive,
+    darkMode,
+    setDarkMode,
   };
 
   return (
