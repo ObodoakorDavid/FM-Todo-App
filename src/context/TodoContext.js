@@ -1,6 +1,6 @@
 /** @format */
 
-import { createContext, useEffect, useRef, useState } from "react";
+import { createContext, useEffect, useRef, useState, useCallback } from "react";
 import uuid from "react-uuid";
 
 const TodoContext = createContext();
@@ -11,12 +11,16 @@ export const TodoProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(false);
   const [onMount, setOnMount] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  // const [bgRef, setBgRed] = useState(null);
   const bgRef = useRef(null);
-  const [data, setData] = useState({
-    todos: [],
-    completedTodos: [],
-    uncompletedTodos: [],
+  const [data, setData] = useState(() => {
+    const tempData = JSON.parse(localStorage.getItem("data"));
+    return (
+      tempData || {
+        todos: [],
+        completedTodos: [],
+        uncompletedTodos: [],
+      }
+    );
   });
 
   const [loading, setLoading] = useState({
@@ -24,6 +28,14 @@ export const TodoProvider = ({ children }) => {
     completed: false,
     active: false,
   });
+
+  useEffect(() => {
+    localStorage.setItem("data", JSON.stringify(data));
+  }, [data]);
+
+  let handleSetItem = () => {
+    localStorage.setItem("data", JSON.stringify(data));
+  };
 
   let HandleNewTodo = (checkedState) => {
     let newTodo = {
@@ -44,9 +56,7 @@ export const TodoProvider = ({ children }) => {
         completedTodos: [...data.completedTodos, newTodo],
       });
     }
-
-    console.log(newTodo.id);
-    console.log(newTodo);
+    // handleSetItem();
   };
 
   let handleSwitchCompleted = () => {
@@ -56,6 +66,7 @@ export const TodoProvider = ({ children }) => {
       completedTodos: filteredTodos,
     });
     setLoading({ active: false, all: false, completed: true });
+    // handleSetItem();
   };
 
   let handleSwitchActive = () => {
@@ -65,6 +76,7 @@ export const TodoProvider = ({ children }) => {
       uncompletedTodos: filteredTodos,
     });
     setLoading({ active: true, all: false, completed: false });
+    // handleSetItem();
   };
 
   let handleComplete = (IncomingTodo, completedState) => {
@@ -82,6 +94,7 @@ export const TodoProvider = ({ children }) => {
       completedTodos: updatedTodos.filter((todo) => todo.completed === true),
       uncompletedTodos: updatedTodos.filter((todo) => todo.completed === false),
     });
+    // handleSetItem();
   };
 
   let handleRemoveTodo = (IncomingTodo) => {
@@ -95,6 +108,7 @@ export const TodoProvider = ({ children }) => {
       completedTodos: updatedTodos.filter((todo) => todo.completed === true),
       uncompletedTodos: updatedTodos.filter((todo) => todo.completed === false),
     });
+    // handleSetItem();
   };
 
   let handleClearCompleted = () => {
@@ -105,6 +119,7 @@ export const TodoProvider = ({ children }) => {
       completedTodos: updatedTodos.filter((todo) => todo.completed === true),
       uncompletedTodos: updatedTodos.filter((todo) => todo.completed === false),
     });
+    // handleSetItem();
   };
 
   let TodoData = {
