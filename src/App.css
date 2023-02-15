@@ -46,12 +46,13 @@ h1 {
   color: white;
 }
 
-form input, .each-todo {
+form input,
+.each-todo {
   background-color: var(--very-light-gray);
   color: var(--dark-grayish-blue);
 }
 
-.bottom-half  div {
+.bottom-half div {
   background-color: var(--very-light-gray);
   color: var(--dark-grayish-blue);
 }
@@ -119,7 +120,23 @@ form,
   cursor: pointer;
 }
 
-.todo-active {
+.each-todo p {
+  color: var(--very-dark-grayish-blue);
+}
+
+.each-todo p.todo-active {
   text-decoration: line-through;
-  color: var(--dark-grayish-blue);
+  color: var(--very-light-grayish-blue);
+}
+.todo-input {
+  color: var(--very-dark-grayish-blue);
+}
+
+.todo-input.todo-active {
+  text-decoration: line-through;
+  color: var(--very-light-grayish-blue);
+}
+
+.close-btn {
+  cursor: pointer;
 }

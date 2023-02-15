@@ -24,13 +24,13 @@ function App() {
         <div className="bottom-half rounded">
           {loading.all && <AllTodos />}
           {loading.completed && <CompletedTodo />}
-          {loading.active && <ActiveTodos/>}
+          {loading.active && <ActiveTodos />}
           <div className="d-flex justify-content-between ps-3 pe-3 pt-3 pb-3 mt-1">
             <small>{data.uncompletedTodos.length} items left</small>
             <small>Clear Completed</small>
           </div>
           <AAC />
-        </div>
+        </div>  
       </div>
     </div>
   );

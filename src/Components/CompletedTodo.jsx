@@ -4,7 +4,7 @@ import React, { useState, useContext } from "react";
 import TodoContext from "../context/TodoContext";
 
 const CompletedTodo = () => {
-  const { data, handleComplete } = useContext(TodoContext);
+  const { data, handleComplete, handleRemoveTodo } = useContext(TodoContext);
   return (
     <div className="all-todo d-flex flex-column">
       {data.completedTodos.map((todo) => {
@@ -17,7 +17,6 @@ const CompletedTodo = () => {
               onChange={(e) => {
                 console.log(e.target.checked);
                 handleComplete(todo, e.target.checked);
-                
               }}
               type="checkbox"
               checked={todo.completed ? true : false}
@@ -25,7 +24,15 @@ const CompletedTodo = () => {
             <p className={todo.completed ? "todo-active ps-3 m-0" : "ps-3 m-0"}>
               {todo.todoName}
             </p>
-            <p className="m-0">X</p>
+            <p
+              onClick={() => {
+                handleRemoveTodo(todo);
+                console.log("ww");
+              }}
+              className="m-0 close-btn"
+            >
+              X
+            </p>
           </div>
         );
       })}

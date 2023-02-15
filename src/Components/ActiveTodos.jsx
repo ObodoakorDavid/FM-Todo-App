@@ -4,13 +4,13 @@ import React, { useContext } from "react";
 import TodoContext from "../context/TodoContext";
 
 const ActiveTodos = () => {
-  const { data, handleComplete } = useContext(TodoContext);
+  const { data, handleComplete, handleRemoveTodo } = useContext(TodoContext);
   return (
     <div className="all-todo d-flex flex-column">
       {data.uncompletedTodos.map((todo) => {
         return (
           <div
-            className="each-todo p-2 ps-3 pe-3 border-bottom bg-white text-left"
+            className="each-todo p-2 ps-3 pe-3 border-bottom text-left"
             key={todo.id}
           >
             <input
@@ -24,8 +24,15 @@ const ActiveTodos = () => {
             <p className={todo.completed ? "todo-active ps-3 m-0" : "ps-3 m-0"}>
               {todo.todoName}
             </p>
-            <p className="m-0">X</p>
-            
+            <p
+              onClick={() => {
+                handleRemoveTodo(todo);
+                console.log("rand");
+              }}
+              className="m-0 close-btn"
+            >
+              X
+            </p>
           </div>
         );
       })}
