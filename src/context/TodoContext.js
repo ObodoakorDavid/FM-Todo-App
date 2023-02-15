@@ -114,6 +114,18 @@ export const TodoProvider = ({ children }) => {
     });
   };
 
+  let handleClearCompleted = () => {
+    let updatedTodos = data.todos.filter(
+      (todo) => todo.completed == false  
+    );
+    setData({
+      ...data,
+      todos: updatedTodos,
+      completedTodos: updatedTodos.filter((todo) => todo.completed === true),
+      uncompletedTodos: updatedTodos.filter((todo) => todo.completed === false),
+    });
+  };
+
   let TodoData = {
     HandleNewTodo,
     setInputValue,
@@ -127,6 +139,7 @@ export const TodoProvider = ({ children }) => {
     darkMode,
     setDarkMode,
     handleRemoveTodo,
+    handleClearCompleted,
   };
 
   return (

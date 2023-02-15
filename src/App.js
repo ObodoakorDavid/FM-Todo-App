@@ -12,7 +12,7 @@ import AAC from "./Components/AAC";
 import ActiveTodos from "./Components/ActiveTodos";
 
 function App() {
-  const { data, loading } = useContext(TodoContext);
+  const { data, loading, handleClearCompleted } = useContext(TodoContext);
 
   return (
     <div className="App">
@@ -27,10 +27,16 @@ function App() {
           {loading.active && <ActiveTodos />}
           <div className="d-flex justify-content-between ps-3 pe-3 pt-3 pb-3 mt-1">
             <small>{data.uncompletedTodos.length} items left</small>
-            <small>Clear Completed</small>
+            <small
+              onClick={() => {
+                handleClearCompleted();
+              }}
+            >
+              Clear Completed
+            </small>
           </div>
           <AAC />
-        </div>  
+        </div>
       </div>
     </div>
   );
