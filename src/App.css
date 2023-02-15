@@ -92,6 +92,20 @@ form input,
   padding-bottom: 50px;
 }
 
+.bgDarkTheme {
+  background-image: url(./assets/images/bg-mobile-dark.jpg);
+}
+
+@media (min-width: 768px) {
+  .top-half {
+    background-image: url(./assets/images/bg-desktop-light.jpg);
+  }
+
+  .bgDarkTheme {
+    background-image: url(./assets/images/bg-desktop-dark.jpg);
+  }
+}
+
 .todo-input {
   width: 90%;
   border: none;
@@ -139,4 +153,12 @@ form,
 
 .close-btn {
   cursor: pointer;
+}
+
+img {
+  transition: 0.3s ease-in-out;
+}
+
+img:hover {
+  transform: scale(1.1);
 }

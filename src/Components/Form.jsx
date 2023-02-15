@@ -6,17 +6,19 @@ import lightIcon from "../assets/icons/icon-sun.svg";
 import darkIcon from "../assets/icons/icon-moon.svg";
 
 const Form = () => {
-  const { HandleNewTodo, setInputValue, darkMode, setDarkMode } =
+  const { HandleNewTodo, setInputValue, darkMode, setDarkMode, bgRef } =
     useContext(TodoContext);
 
   const [checked, setChecked] = useState(false);
   let body = document.body;
 
   function handleChangeTheme() {
-    if (darkMode == true) {
+    if (darkMode == false) {
       body.classList.add("darkTheme");
+      bgRef.current.classList.add("bgDarkTheme");
     } else {
       body.classList.remove("darkTheme");
+      bgRef.current.classList.remove("bgDarkTheme");
     }
   }
 

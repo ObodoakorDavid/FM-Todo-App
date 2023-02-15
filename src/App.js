@@ -12,12 +12,13 @@ import AAC from "./Components/AAC";
 import ActiveTodos from "./Components/ActiveTodos";
 
 function App() {
-  const { data, loading, handleClearCompleted } = useContext(TodoContext);
+  const { data, loading, handleClearCompleted, bgRef } =
+    useContext(TodoContext);
 
   return (
     <div className="App">
       <div className="main-content">
-        <div className="top-half">
+        <div ref={bgRef} className="top-half">
           <Form />
         </div>
 
