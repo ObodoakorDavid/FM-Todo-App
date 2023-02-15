@@ -37,7 +37,7 @@
 .App {
   text-align: center;
   background-color: var(--very-light-grayish-blue);
-  height: 100vh;
+  min-height: 100vh;
 }
 
 h1 {
