@@ -9,7 +9,6 @@ export default TodoContext;
 
 export const TodoProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(false);
-  const [onMount, setOnMount] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const bgRef = useRef(null);
   const [data, setData] = useState(() => {
@@ -38,6 +37,9 @@ export const TodoProvider = ({ children }) => {
   };
 
   let HandleNewTodo = (checkedState) => {
+    if (inputValue == "") {
+      return;
+    }
     let newTodo = {
       id: uuid(),
       todoName: inputValue,
@@ -56,7 +58,7 @@ export const TodoProvider = ({ children }) => {
         completedTodos: [...data.completedTodos, newTodo],
       });
     }
-    // handleSetItem();
+    setInputValue("");
   };
 
   let handleSwitchCompleted = () => {
@@ -98,7 +100,6 @@ export const TodoProvider = ({ children }) => {
   };
 
   let handleRemoveTodo = (IncomingTodo) => {
-    console.log(IncomingTodo);
     let updatedTodos = data.todos.filter(
       (existingTodo) => existingTodo.id !== IncomingTodo.id
     );
@@ -108,7 +109,6 @@ export const TodoProvider = ({ children }) => {
       completedTodos: updatedTodos.filter((todo) => todo.completed === true),
       uncompletedTodos: updatedTodos.filter((todo) => todo.completed === false),
     });
-    // handleSetItem();
   };
 
   let handleClearCompleted = () => {
@@ -119,11 +119,11 @@ export const TodoProvider = ({ children }) => {
       completedTodos: updatedTodos.filter((todo) => todo.completed === true),
       uncompletedTodos: updatedTodos.filter((todo) => todo.completed === false),
     });
-    // handleSetItem();
   };
 
   let TodoData = {
     HandleNewTodo,
+    inputValue,
     setInputValue,
     data,
     setData,

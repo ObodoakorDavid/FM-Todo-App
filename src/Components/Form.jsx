@@ -6,8 +6,14 @@ import lightIcon from "../assets/icons/icon-sun.svg";
 import darkIcon from "../assets/icons/icon-moon.svg";
 
 const Form = () => {
-  const { HandleNewTodo, setInputValue, darkMode, setDarkMode, bgRef } =
-    useContext(TodoContext);
+  const {
+    HandleNewTodo,
+    inputValue,
+    setInputValue,
+    darkMode,
+    setDarkMode,
+    bgRef,
+  } = useContext(TodoContext);
 
   const [checked, setChecked] = useState(false);
   let body = document.body;
@@ -62,6 +68,7 @@ const Form = () => {
             setInputValue(e.target.value);
           }}
           type="text"
+          value={inputValue}
           className={checked ? "todo-active todo-input" : "todo-input"}
         />
       </div>

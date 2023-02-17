@@ -32,6 +32,7 @@ function App() {
               onClick={() => {
                 handleClearCompleted();
               }}
+              style={{ cursor: "pointer" }}
             >
               Clear Completed
             </small>
