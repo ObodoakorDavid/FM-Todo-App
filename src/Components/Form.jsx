@@ -12,21 +12,9 @@ const Form = () => {
     setInputValue,
     darkMode,
     setDarkMode,
-    bgRef,
   } = useContext(TodoContext);
 
   const [checked, setChecked] = useState(false);
-  let body = document.body;
-
-  function handleChangeTheme() {
-    if (darkMode == false) {
-      body.classList.add("darkTheme");
-      bgRef.current.classList.add("bgDarkTheme");
-    } else {
-      body.classList.remove("darkTheme");
-      bgRef.current.classList.remove("bgDarkTheme");
-    }
-  }
 
   return (
     <form
@@ -41,17 +29,17 @@ const Form = () => {
           <img
             onClick={() => {
               setDarkMode(false);
-              handleChangeTheme();
             }}
             src={lightIcon}
+            alt="light-icon"
           />
         ) : (
           <img
             onClick={() => {
               setDarkMode(true);
-              handleChangeTheme();
             }}
             src={darkIcon}
+            alt="dark-icon"
           />
         )}
       </div>
@@ -59,7 +47,6 @@ const Form = () => {
         <input
           onChange={(e) => {
             setChecked(e.target.checked);
-            console.log(e.target.checked);
           }}
           type="checkbox"
         />

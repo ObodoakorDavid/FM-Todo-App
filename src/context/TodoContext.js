@@ -1,6 +1,6 @@
 /** @format */
 
-import { createContext, useEffect, useRef, useState, useCallback } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import uuid from "react-uuid";
 
 const TodoContext = createContext();
@@ -8,7 +8,14 @@ const TodoContext = createContext();
 export default TodoContext;
 
 export const TodoProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    const tempDarkMode = JSON.parse(localStorage.getItem("todo-dark-mode"));
+    console.log(tempDarkMode);
+    return tempDarkMode || false;
+  });
+  console.log(darkMode);
+
+  console.log(darkMode);
   const [inputValue, setInputValue] = useState("");
   const bgRef = useRef(null);
   const [data, setData] = useState(() => {
@@ -30,14 +37,21 @@ export const TodoProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("data", JSON.stringify(data));
-  }, [data]);
 
-  let handleSetItem = () => {
-    localStorage.setItem("data", JSON.stringify(data));
-  };
+    // ===========
+    let body = document.body;
+    if (darkMode === true) {
+      body.classList.add("darkTheme");
+      bgRef.current.classList.add("bgDarkTheme");
+    } else {
+      body.classList.remove("darkTheme");
+      bgRef.current.classList.remove("bgDarkTheme");
+    }
+    localStorage.setItem("todo-dark-mode", JSON.stringify(darkMode));
+  }, [data, darkMode]);
 
   let HandleNewTodo = (checkedState) => {
-    if (inputValue == "") {
+    if (inputValue === "") {
       return;
     }
     let newTodo = {
@@ -45,7 +59,7 @@ export const TodoProvider = ({ children }) => {
       todoName: inputValue,
       completed: checkedState,
     };
-    if (newTodo.completed == false) {
+    if (newTodo.completed === false) {
       setData({
         ...data,
         todos: [...data.todos, newTodo],
@@ -62,28 +76,26 @@ export const TodoProvider = ({ children }) => {
   };
 
   let handleSwitchCompleted = () => {
-    let filteredTodos = data.todos.filter((todo) => todo.completed == true);
+    let filteredTodos = data.todos.filter((todo) => todo.completed === true);
     setData({
       ...data,
       completedTodos: filteredTodos,
     });
     setLoading({ active: false, all: false, completed: true });
-    // handleSetItem();
   };
 
   let handleSwitchActive = () => {
-    let filteredTodos = data.todos.filter((todo) => todo.completed == false);
+    let filteredTodos = data.todos.filter((todo) => todo.completed === false);
     setData({
       ...data,
       uncompletedTodos: filteredTodos,
     });
     setLoading({ active: true, all: false, completed: false });
-    // handleSetItem();
   };
 
   let handleComplete = (IncomingTodo, completedState) => {
     const updatedTodos = data.todos.map((todo) => {
-      if (IncomingTodo.id == todo.id) {
+      if (IncomingTodo.id === todo.id) {
         return { ...todo, completed: completedState };
       } else {
         return todo;
@@ -96,7 +108,6 @@ export const TodoProvider = ({ children }) => {
       completedTodos: updatedTodos.filter((todo) => todo.completed === true),
       uncompletedTodos: updatedTodos.filter((todo) => todo.completed === false),
     });
-    // handleSetItem();
   };
 
   let handleRemoveTodo = (IncomingTodo) => {
@@ -112,7 +123,7 @@ export const TodoProvider = ({ children }) => {
   };
 
   let handleClearCompleted = () => {
-    let updatedTodos = data.todos.filter((todo) => todo.completed == false);
+    let updatedTodos = data.todos.filter((todo) => todo.completed === false);
     setData({
       ...data,
       todos: updatedTodos,

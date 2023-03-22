@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useContext } from "react";
+import React, {useContext } from "react";
 import TodoContext from "../context/TodoContext";
 
 const CompletedTodo = () => {

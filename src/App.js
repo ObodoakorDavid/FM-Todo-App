@@ -1,6 +1,4 @@
 /** @format */
-
-import logo from "./logo.svg";
 import "./App.css";
 import { useContext } from "react";
 import TodoContext from "./context/TodoContext";
